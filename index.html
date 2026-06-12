@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="apple-touch-icon" href="https://atoutsidis-hub.github.io/priceseeker-dashboard/icon.png">
-<link rel="icon" href="https://atoutsidis-hub.github.io/priceseeker-dashboard/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="shortcut icon" href="icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PriceSeeker Ratings — Surprice Mobility</title>
 <style>
@@ -331,5 +331,32 @@ function switchRankTab(bk,tab,btn){activeTab[bk]=tab;renderRankings(D.weeks[curr
 function switchRankWeek(w,btn){activeRankWeek=w;renderRankings(D.weeks[currentWeekIdx]);}
 renderAll(currentWeekIdx);
 </script>
+
+<canvas id="__icon__" width="180" height="180" style="display:none"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('__icon__');
+  var ctx=c.getContext('2d');
+  var r=36,w=180,h=180;
+  ctx.beginPath();
+  ctx.moveTo(r,0);ctx.lineTo(w-r,0);ctx.quadraticCurveTo(w,0,w,r);
+  ctx.lineTo(w,h-r);ctx.quadraticCurveTo(w,h,w-r,h);
+  ctx.lineTo(r,h);ctx.quadraticCurveTo(0,h,0,h-r);
+  ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);
+  ctx.closePath();
+  ctx.fillStyle='#1a1a23';ctx.fill();
+  ctx.font='28px serif';ctx.textAlign='center';
+  var stars=[{x:32,y:62},{x:58,y:46},{x:90,y:40},{x:122,y:46},{x:148,y:62}];
+  stars.forEach(function(s){ctx.fillText('⭐',s.x,s.y);});
+  ctx.font='72px serif';
+  ctx.fillText('👍',90,142);
+  var url=c.toDataURL('image/png');
+  var l1=document.createElement('link');l1.rel='apple-touch-icon';l1.href=url;
+  var l2=document.createElement('link');l2.rel='icon';l2.type='image/png';l2.href=url;
+  document.head.appendChild(l1);
+  document.head.appendChild(l2);
+})();
+</script>
+
 </body>
 </html>
