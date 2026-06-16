@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="shortcut icon" href="icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PriceSeeker Ratings — Surprice Mobility</title>
 <style>
@@ -73,8 +75,8 @@ th{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;le
 td{padding:8px 12px;border-bottom:1px solid #f0f2f8;vertical-align:middle}
 .country-row td{background:var(--surface)}.country-row:hover td{background:#f6f8fd}
 .dest-row td{background:#fafbfe;font-size:11px}.dest-row:hover td{background:#f0f3fb}
-.tcountry{font-weight:700;white-space:nowrap}
-.dest-name{color:var(--muted);padding-left:14px;white-space:nowrap;font-weight:500}
+.tcountry{font-weight:700;white-space:nowrap;position:sticky;left:0;background:#fff;z-index:2;box-shadow:2px 0 4px rgba(0,0,0,.06)}
+.dest-name{color:var(--muted);padding-left:14px;white-space:nowrap;font-weight:500;position:sticky;left:0;background:#fafbfe;z-index:2;box-shadow:2px 0 4px rgba(0,0,0,.06)}
 .toggle-btn{background:none;border:1.5px solid var(--border);border-radius:5px;cursor:pointer;font-size:9px;padding:2px 7px;color:var(--muted);margin-right:6px;line-height:1.5;transition:all .15s;font-family:inherit}
 .toggle-btn:hover{background:var(--red-light);border-color:var(--red);color:var(--red)}.toggle-btn.open{background:var(--red);color:#fff;border-color:var(--red)}
 .sb{display:flex;align-items:center;gap:7px}
