@@ -315,16 +315,16 @@ function renderAll(idx){
 }
 function switchWeek(idx){currentWeekIdx=idx;renderAll(idx);}
 function filterBroker(col,btn){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');activeBroker=col;applyFilters();
-  if(col!=='all'){
-    const th=document.getElementById('th-'+col);
-    const scroll=document.querySelector('.tscroll');
-    if(th&&scroll){
-      const thLeft=th.offsetLeft;
-      scroll.scrollTo({left:thLeft-4,behavior:'smooth'});
-    }
-  } else {
-    const scroll=document.querySelector('.tscroll');
-    if(scroll) scroll.scrollTo({left:0,behavior:'smooth'});
+  const scroll=document.querySelector('.tscroll');
+  if(!scroll)return;
+  if(col==='all'){scroll.scrollTo({left:0,behavior:'smooth'});return;}
+  const th=document.getElementById('th-'+col);
+  if(th){
+    const thRect=th.getBoundingClientRect();
+    const scrollRect=scroll.getBoundingClientRect();
+    const stickyW=document.querySelector('.tcountry')?document.querySelector('.tcountry').offsetWidth:120;
+    const target=scroll.scrollLeft+(thRect.left-scrollRect.left)-stickyW-4;
+    scroll.scrollTo({left:Math.max(0,target),behavior:'smooth'});
   }
 }
 function applyFilters(){
