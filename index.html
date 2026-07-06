@@ -197,12 +197,12 @@ footer{text-align:center;padding:28px 16px;font-size:11px;color:var(--muted);bor
       <table>
         <thead><tr>
           <th>Country / Destination</th>
-          <th style="color:#1a56b0">RentalCars</th><th>WoW</th>
-          <th style="color:#0b6b4e">CarTrawler</th><th>WoW</th>
-          <th style="color:#4d3fb0">Expedia</th><th>WoW</th>
-          <th style="color:#b36010">DiscoverCars</th><th>WoW</th>
-          <th style="color:#8f3518">BookingGroup</th><th>WoW</th>
-          <th style="color:#5a5a55">DoYouSpain</th><th>WoW</th>
+          <th id="th-rc" style="color:#1a56b0">RentalCars</th><th>WoW</th>
+          <th id="th-ct" style="color:#0b6b4e">CarTrawler</th><th>WoW</th>
+          <th id="th-exp" style="color:#4d3fb0">Expedia</th><th>WoW</th>
+          <th id="th-dc" style="color:#b36010">DiscoverCars</th><th>WoW</th>
+          <th id="th-bg" style="color:#8f3518">BookingGroup</th><th>WoW</th>
+          <th id="th-dy" style="color:#5a5a55">DoYouSpain</th><th>WoW</th>
         </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
@@ -314,7 +314,19 @@ function renderAll(idx){
   renderMetrics(week);renderBars(week);renderTable(idx);renderRankings(week);renderExecSummary(week,idx);renderAlerts(week);
 }
 function switchWeek(idx){currentWeekIdx=idx;renderAll(idx);}
-function filterBroker(col,btn){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');activeBroker=col;applyFilters();}
+function filterBroker(col,btn){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');activeBroker=col;applyFilters();
+  if(col!=='all'){
+    const th=document.getElementById('th-'+col);
+    const scroll=document.querySelector('.tscroll');
+    if(th&&scroll){
+      const thLeft=th.offsetLeft;
+      scroll.scrollTo({left:thLeft-4,behavior:'smooth'});
+    }
+  } else {
+    const scroll=document.querySelector('.tscroll');
+    if(scroll) scroll.scrollTo({left:0,behavior:'smooth'});
+  }
+}
 function applyFilters(){
   document.querySelectorAll('.country-row').forEach(row=>{(activeBroker==='all'||row.getAttribute('data-'+activeBroker)==='1')?row.classList.remove('hidden'):row.classList.add('hidden');});
   document.querySelectorAll('tr[class*="dest-"]').forEach(row=>{const dc=Array.from(row.classList).find(c=>c.startsWith('dest-')&&c!=='dest-row');if(!dc)return;const key=dc.replace('dest-','');if(!expandedKeys[key])return;row.style.display=(activeBroker==='all'||row.getAttribute('data-'+activeBroker)==='1')?'':'none';});
